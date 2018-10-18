@@ -287,7 +287,7 @@ class RedisClient extends Nette\Object implements \ArrayAccess
 		}
 
 		if (!$this->driver) {
-			$this->driver = new Driver\PhpRedisDriver();
+			$this->driver = phpversion('redis') >= '4.0.0' ? new Driver\PhpRedisDriver() : new Driver\PhpRedisDriverOld();
 		}
 
 		if ($this->driver->isConnected()) {
